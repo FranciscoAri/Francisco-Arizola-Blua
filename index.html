@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Personal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .section-content {
+            display: none; /* Hidden by default */
+        }
+        .section-content.active {
+            display: block; /* Shown when active */
+        }
+        .nav-link.active {
+            @apply border-b-2 border-blue-500 text-blue-600;
+        }
+        .project-modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .project-modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 700px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- Header and Navigation -->
+    <header class="bg-white shadow-md py-4 px-6 sticky top-0 z-50">
+        <nav class="container mx-auto flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-8">
+            <a href="#perfil" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-lg font-medium transition-colors duration-200 active" data-section="perfil">Perfil</a>
+            <a href="#cursos" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-lg font-medium transition-colors duration-200" data-section="cursos">Cursos</a>
+            <a href="#matlab-dynare" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-lg font-medium transition-colors duration-200" data-section="matlab-dynare">MATLAB y Dynare</a>
+            <a href="#proyectos" class="nav-link text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-lg font-medium transition-colors duration-200" data-section="proyectos">Proyectos</a>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container mx-auto p-6 flex-grow">
+
+        <!-- Perfil Section -->
+        <section id="perfil" class="section-content active bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Perfil</h2>
+            <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                <!-- Profile Picture -->
+                <div class="flex-shrink-0">
+                    <img src="https://placehold.co/150x150/aabbcc/ffffff?text=Tu+Foto" alt="Foto de Perfil" class="w-40 h-40 rounded-full object-cover shadow-md border-4 border-gray-200">
+                </div>
+                <!-- Profile Details -->
+                <div class="flex-grow text-center md:text-left">
+                    <h3 class="text-4xl font-extrabold text-gray-900 mb-2">Tu Nombre Completo</h3>
+                    <p class="text-xl text-gray-700 mb-2">Estudiante de <span class="font-semibold">Economía en la Universidad XXX</span></p>
+                    <p class="text-lg text-gray-600">Puesto actual: <span class="font-medium">Asistente de Investigación</span></p>
+                    <!-- CV Link -->
+                    <div class="mt-6">
+                        <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300">
+                            Descargar CV (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cursos Section -->
+        <section id="cursos" class="section-content bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Cursos</h2>
+            <div class="flex flex-col md:flex-row md:space-x-8">
+                <!-- Submenu for Courses -->
+                <nav class="flex-shrink-0 w-full md:w-1/4 mb-6 md:mb-0">
+                    <ul class="space-y-3">
+                        <li><a href="#" class="course-link block bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-md font-medium transition-colors duration-200 active" data-course="macro1">Macroeconomía 1</a></li>
+                        <li><a href="#" class="course-link block bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-md font-medium transition-colors duration-200" data-course="macro3">Macroeconomía 3</a></li>
+                        <li><a href="#" class="course-link block bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-4 rounded-md font-medium transition-colors duration-200" data-course="macro-int">Macroeconomía Internacional</a></li>
+                    </ul>
+                </nav>
+                <!-- Course Content Area -->
+                <div id="course-content" class="flex-grow w-full md:w-3/4 bg-gray-50 p-6 rounded-lg border border-gray-200">
+                    <!-- Content for Macroeconomía 1 (default active) -->
+                    <div id="macro1" class="course-detail active">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Macroeconomía 1</h3>
+                        <p class="text-gray-700 mb-4">Aquí encontrarás las notas de clase y el material de apoyo para Macroeconomía 1.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Notas de Clase - Tema 1 (PDF)</a></li>
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Presentación - Introducción (PDF)</a></li>
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Lectura Adicional - Capítulo 1 (PDF)</a></li>
+                        </ul>
+                    </div>
+                    <!-- Content for Macroeconomía 3 -->
+                    <div id="macro3" class="course-detail hidden">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Macroeconomía 3</h3>
+                        <p class="text-gray-700 mb-4">Material didáctico y apuntes para Macroeconomía 3.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Notas de Clase - Tema Avanzado (PDF)</a></li>
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Ejercicios Resueltos (PDF)</a></li>
+                        </ul>
+                    </div>
+                    <!-- Content for Macroeconomía Internacional -->
+                    <div id="macro-int" class="course-detail hidden">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Macroeconomía Internacional</h3>
+                        <p class="text-gray-700 mb-4">Recursos para el curso de Macroeconomía Internacional.</p>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Apuntes de Clase - Comercio (PDF)</a></li>
+                            <li><a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline">Artículos Relevantes (PDF)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MATLAB y Dynare Section -->
+        <section id="matlab-dynare" class="section-content bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">MATLAB y Dynare</h2>
+            <p class="text-gray-700 mb-6 text-lg">Aquí puede ver un repositorio de modelos introducidos en Dynare, listos para descargar y explorar.</p>
+            <ul class="list-disc list-inside space-y-3">
+                <li>
+                    <span class="font-semibold text-gray-800">Modelo RBC Básico:</span>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline ml-2">Descargar modelo (mod)</a>
+                </li>
+                <li>
+                    <span class="font-semibold text-gray-800">Modelo Neokeynesiano Simple:</span>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline ml-2">Descargar modelo (mod)</a>
+                </li>
+                <li>
+                    <span class="font-semibold text-gray-800">Modelo con Fricciones Financieras:</span>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline ml-2">Descargar modelo (mod)</a>
+                </li>
+                <li>
+                    <span class="font-semibold text-gray-800">Modelo de Ciclo Real con Capital Humano:</span>
+                    <a href="https://www.africau.edu/images/default/sample.pdf" target="_blank" class="text-blue-600 hover:underline ml-2">Descargar modelo (mod)</a>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Proyectos Section -->
+        <section id="proyectos" class="section-content bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Proyectos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-gray-50 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1" data-project="project1">
+                    <img src="https://placehold.co/400x250/c0c0c0/ffffff?text=Proyecto+1" alt="Imagen del Proyecto 1" class="w-full h-48 object-cover">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-gray-800">Análisis de Series de Tiempo</h3>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card bg-gray-50 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1" data-project="project2">
+                    <img src="https://placehold.co/400x250/c0c0c0/ffffff?text=Proyecto+2" alt="Imagen del Proyecto 2" class="w-full h-48 object-cover">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-gray-800">Modelado DSGE para Política Monetaria</h3>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card bg-gray-50 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1" data-project="project3">
+                    <img src="https://placehold.co/400x250/c0c0c0/ffffff?text=Proyecto+3" alt="Imagen del Proyecto 3" class="w-full h-48 object-cover">
+                    <div class="p-4 text-center">
+                        <h3 class="text-xl font-semibold text-gray-800">Simulación de Agentes Heterogéneos</h3>
+                    </div>
+                </div>
+                <!-- Add more projects as needed -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Project Modal -->
+    <div id="project-modal" class="project-modal">
+        <div class="project-modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modal-project-title" class="text-2xl font-bold text-gray-800 mb-4"></h3>
+            <p id="modal-project-description" class="text-gray-700 mb-4"></p>
+            <div id="modal-project-materials" class="space-y-2">
+                <!-- Project materials will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="container mx-auto text-center text-gray-400">
+            <p>&copy; 2025 Tu Nombre Completo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section-content');
+            const courseLinks = document.querySelectorAll('.course-link');
+            const courseDetails = document.querySelectorAll('.course-detail');
+            const projectCards = document.querySelectorAll('.project-card');
+            const projectModal = document.getElementById('project-modal');
+            const closeButton = document.querySelector('.close-button');
+            const modalProjectTitle = document.getElementById('modal-project-title');
+            const modalProjectDescription = document.getElementById('modal-project-description');
+            const modalProjectMaterials = document.getElementById('modal-project-materials');
+
+            // --- Navigation Logic ---
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default anchor behavior
+                    const targetSectionId = e.target.dataset.section;
+
+                    // Remove 'active' from all nav links and add to the clicked one
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    // Hide all sections and show the target one
+                    sections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(targetSectionId).classList.add('active');
+
+                    // Scroll to the top of the main content area
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // --- Course Submenu Logic ---
+            courseLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetCourseId = e.target.dataset.course;
+
+                    // Remove 'active' from all course links and add to the clicked one
+                    courseLinks.forEach(cl => cl.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    // Hide all course details and show the target one
+                    courseDetails.forEach(cd => cd.classList.add('hidden'));
+                    document.getElementById(targetCourseId).classList.remove('hidden');
+                });
+            });
+
+            // --- Project Modal Logic ---
+            const projectsData = {
+                project1: {
+                    title: "Análisis de Series de Tiempo",
+                    description: "Este proyecto se enfoca en la aplicación de modelos econométricos avanzados para el análisis y pronóstico de series de tiempo económicas, como el PIB, la inflación y las tasas de interés. Se utilizan modelos ARIMA, GARCH y VAR.",
+                    materials: [
+                        { name: "Reporte Final (PDF)", url: "https://www.africau.edu/images/default/sample.pdf" },
+                        { name: "Código MATLAB (ZIP)", url: "https://www.africau.edu/images/default/sample.pdf" }
+                    ]
+                },
+                project2: {
+                    title: "Modelado DSGE para Política Monetaria",
+                    description: "Desarrollo de un modelo de equilibrio general estocástico dinámico (DSGE) para evaluar el impacto de diferentes reglas de política monetaria en una economía pequeña y abierta. Se calibra el modelo con datos reales y se simulan escenarios.",
+                    materials: [
+                        { name: "Artículo de Investigación (PDF)", url: "https://www.africau.edu/images/default/sample.pdf" },
+                        { name: "Archivos Dynare (ZIP)", url: "https://www.africau.edu/images/default/sample.pdf" }
+                    ]
+                },
+                project3: {
+                    title: "Simulación de Agentes Heterogéneos",
+                    description: "Implementación de un modelo de simulación basado en agentes para estudiar la distribución de la riqueza y el consumo en una economía con individuos heterogéneos. Se exploran los efectos de políticas fiscales y de redistribución.",
+                    materials: [
+                        { name: "Presentación (PDF)", url: "https://www.africau.edu/images/default/sample.pdf" },
+                        { name: "Código Python (ZIP)", url: "https://www.africau.edu/images/default/sample.pdf" }
+                    ]
+                }
+                // Add more project data here
+            };
+
+            projectCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const projectId = card.dataset.project;
+                    const project = projectsData[projectId];
+
+                    if (project) {
+                        modalProjectTitle.textContent = project.title;
+                        modalProjectDescription.textContent = project.description;
+                        modalProjectMaterials.innerHTML = ''; // Clear previous materials
+
+                        project.materials.forEach(material => {
+                            const link = document.createElement('a');
+                            link.href = material.url;
+                            link.target = "_blank";
+                            link.classList.add('block', 'text-blue-600', 'hover:underline', 'py-1');
+                            link.textContent = material.name;
+                            modalProjectMaterials.appendChild(link);
+                        });
+
+                        projectModal.style.display = 'flex'; // Show the modal
+                    }
+                });
+            });
+
+            closeButton.addEventListener('click', () => {
+                projectModal.style.display = 'none'; // Hide the modal
+            });
+
+            // Close the modal if clicked outside of the content
+            window.addEventListener('click', (event) => {
+                if (event.target == projectModal) {
+                    projectModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
